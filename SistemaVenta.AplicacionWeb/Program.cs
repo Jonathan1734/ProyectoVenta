@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaVenta.AplicacionWeb.Utilidades.Automapper;
 using SistemaVenta.DAL.DBContext;
 using SistemaVenta.IOC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

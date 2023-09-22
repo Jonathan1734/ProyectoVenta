@@ -1,20 +1,18 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 @section Estilos{
-<!-- ============================================================
-    =ESTILOS PARA ESTA PAGINA
-    ===============================================================-->
-<link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
-<link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+    <!-- ============================================================
+        =ESTILOS PARA ESTA PAGINA
+        ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
 }
 
-<div class="container-fluid">
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
@@ -23,7 +21,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-user-plus"></i> Nuevo Usuario</button>
+                <button class="btn btn-success" id="btnNuevo"><i class="fas fa-user-plus"></i> Nuevo Usuario</button>
                 </div>
             </div>
             <hr />
@@ -43,8 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
-                         
+                            
                         </tbody>
                     </table>
                 </div>
@@ -118,7 +115,8 @@
         </div>
     </div>
 
-</div>
+
+<!-- /.container-fluid -->
 
 @section Scripts{
     <!-- ============================================================
@@ -133,10 +131,7 @@
     <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
     <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
     <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
-   
+
     <script src="~/js/vistas/Usuario_Index.js"></script>
-
-
-
 
 }

@@ -20,6 +20,7 @@ namespace SistemaVenta.IOC
         public static void InyectarDependencia(this IServiceCollection services,IConfiguration Configuration
             )
         {
+
             services.AddDbContext<DbventaContext>(options =>
             { options.UseSqlServer(Configuration.GetConnectionString("CadenaSQl")); 
             });
