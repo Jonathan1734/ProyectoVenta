@@ -23,9 +23,6 @@ namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
                 ForMember(destino =>
                 destino.EsActivo,
                 opt => opt.MapFrom(origen => origen.EsActivo == true ? 1 : 0)
-
-
-
                 )
                 .ForMember(destino => destino.NombreRol,
                 opt => opt.MapFrom(origen => origen.IdRolNavigation.Descripcion));

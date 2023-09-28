@@ -7,10 +7,7 @@ namespace SistemaVenta.Entity;
 public partial class Usuario
 {
 
-    public Usuario() { 
-        Venta = new HashSet<Venta>();
-    }
-
+  
 
 
 

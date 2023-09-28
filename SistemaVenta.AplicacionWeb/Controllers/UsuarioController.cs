@@ -13,13 +13,14 @@ namespace SistemaVenta.AplicacionWeb.Controllers
     public class UsuarioController : Controller
     {
 
+        private readonly IUsuarioService _usuarioService;
+        private readonly IRolService _rolService;
         private readonly IMapper _mapper;
-        private readonly IUsuarioService _usuarioServicio;
-        private readonly IRolService _rolServicio;
-        public UsuarioController(IUsuarioService usuarioServicio, IRolService rolServicio, IMapper mapper)
+
+        public UsuarioController(IUsuarioService usuarioService, IRolService rolService, IMapper mapper)
         {
-            _usuarioServicio = usuarioServicio;
-            _rolServicio = rolServicio;
+            _usuarioService = usuarioService;
+            _rolService = rolService;
             _mapper = mapper;
         }
 
@@ -36,9 +37,9 @@ namespace SistemaVenta.AplicacionWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> ListaRoles()
         {
-            List<VMRol> vmListaRoles = _mapper.Map<List<VMRol>>(await _rolServicio.Lista());
+            List<VMRol> vmListaRoles = _mapper.Map<List<VMRol>>(await _rolService.Lista());
 
-            return StatusCode(StatusCodes.Status200OK, vmListaRoles);
+            return StatusCode(StatusCodes.Status200OK,vmListaRoles);
 
 
         }
@@ -47,7 +48,7 @@ namespace SistemaVenta.AplicacionWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Lista()
         {
-            List<VMUsuario> vmUsuarioLista = _mapper.Map<List<VMUsuario>>(await _usuarioServicio.Lista());
+            List<VMUsuario> vmUsuarioLista = _mapper.Map<List<VMUsuario>>(await _usuarioService.Lista());
 
             return StatusCode(StatusCodes.Status200OK, new { data = vmUsuarioLista });
         }
@@ -55,7 +56,7 @@ namespace SistemaVenta.AplicacionWeb.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Crear([FromFormAttribute] IFormFile FOTO, [FromForm] String modelo)
+        public async Task<IActionResult> Crear([FromFormAttribute] IFormFile foto, [FromForm] String modelo)
         {
 
             GenericResponse<VMUsuario> gResponse = new GenericResponse<VMUsuario>();
@@ -67,14 +68,14 @@ namespace SistemaVenta.AplicacionWeb.Controllers
                 string nombreFoto = "";
                 Stream fotoStream = null;
 
-                if (FOTO != null)
+                if (foto != null)
                 {
 
                     string nomber_en_codigo = Guid.NewGuid().ToString("N");    
-                    string extension = Path.GetExtension(FOTO.FileName);
+                    string extension = Path.GetExtension(foto.FileName);
                     nombreFoto = string.Concat(nombreFoto, extension); 
                     
-                    fotoStream = FOTO.OpenReadStream();
+                    fotoStream = foto.OpenReadStream();
 
 
                 }
@@ -83,7 +84,7 @@ namespace SistemaVenta.AplicacionWeb.Controllers
                 string urlPlantillaCorreo = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/EnviarClave?correo=[correo]&clave=[clave]";
 
 
-                Usuario usuario_creado = await _usuarioServicio.Crear(_mapper.Map<Usuario>(vmUsuario), fotoStream, nombreFoto, urlPlantillaCorreo);
+                Usuario usuario_creado = await _usuarioService.Crear(_mapper.Map<Usuario>(vmUsuario), fotoStream, nombreFoto, urlPlantillaCorreo);
 
 
                 vmUsuario = _mapper.Map<VMUsuario>(usuario_creado);
@@ -141,7 +142,7 @@ namespace SistemaVenta.AplicacionWeb.Controllers
 
 
 
-                Usuario usuario_editado = await _usuarioServicio.Editar(_mapper.Map<Usuario>(vmUsuario), fotoStream, nombreFoto);
+                Usuario usuario_editado = await _usuarioService.Editar(_mapper.Map<Usuario>(vmUsuario), fotoStream, nombreFoto);
 
 
                 vmUsuario = _mapper.Map<VMUsuario>(usuario_editado);
@@ -181,7 +182,7 @@ namespace SistemaVenta.AplicacionWeb.Controllers
 
 
 
-                gResponse.Estado = await  _usuarioServicio.Eliminar(IdUsuario);
+                gResponse.Estado = await  _usuarioService.Eliminar(IdUsuario);
 
 
 
