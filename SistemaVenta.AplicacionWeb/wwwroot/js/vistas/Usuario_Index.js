@@ -131,7 +131,7 @@ function mostrarModal(modelo = MODELO_BASE) {
 
 $("#btnNuevo").click(function () {
     mostrarModal();
- console.log(data)
+
 
 })
 
@@ -290,7 +290,7 @@ $("#tbdata tbody").on("click", ".btn-editar", function () {
     const data = tablaData.row(filaSeleccionada).data();
 
     mostrarModal(data);
-    console.log(data)
+    
 })
 
 
